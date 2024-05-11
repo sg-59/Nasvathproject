@@ -1,15 +1,25 @@
-import React, { useContext } from 'react'
-import { Appcontext } from './Context1'
+import React from 'react'
+import { useSelector,useDispatch } from 'react-redux'
+import { removeUser } from '../Redux/Userslice'
 
 const Third = () => {
 
-    const data=useContext(Appcontext)
+  const dispatch=useDispatch()
 
-    console.log("##############",data.User);
+  const ApidatafromFirst=useSelector((state)=>state.user.userInfo[0])
+  console.log("Final answer get it",ApidatafromFirst);
+
+
+  function remove(){
+dispatch(removeUser())
+  }
 
   return (
     <div>
-      <h1>{data.User&&data.User.name}</h1>
+    {ApidatafromFirst&&ApidatafromFirst.map((li)=>(
+      <h1>{li.name}</h1>
+    ))}
+    <button onClick={remove}>Remove</button>
     </div>
   )
 }

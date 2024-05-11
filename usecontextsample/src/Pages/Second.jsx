@@ -1,24 +1,26 @@
-import React, { useContext } from 'react'
-import { Appcontext } from './Context1'
+import React from 'react'
+import { useSelector,useDispatch } from 'react-redux'
+import { removeProduct } from '../Redux/Productslice';
+
 
 const Second = () => {
 
-    const Ok=useContext(Appcontext)
-    const {dispatch}=useContext(Appcontext)
+  const dispatch=useDispatch()
 
+  const Items=useSelector((state)=>state.Product.ProductDetails)
+  console.log("Items ...........",Items);
 
-
-    const remove=()=>{
-dispatch({type:"remove"})
-    }
+  function RemovedData(){
+   dispatch(removeProduct())
+  }
 
   return (
     <div>
-        <h1>{Ok.User&&Ok.User.name}</h1>
-        <h1>{Ok.User&&Ok.User.place}</h1>
-        <h1>{Ok.User&&Ok.User.email}</h1>
-        <h1>{Ok.User&&Ok.User.Domain}</h1>
-        <button onClick={remove}>Remove</button>
+       <h1>{Items?.Product}</h1>
+       <h1>{Items?.Model}</h1>
+       <h1>{Items?.Price}</h1>
+       <h1>{Items?.Brand}</h1>
+       <button onClick={RemovedData}>Remove Data</button>
     </div>
   )
 }
